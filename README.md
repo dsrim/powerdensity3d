@@ -29,3 +29,6 @@ can be reproduced by running ``plotExp1.m``, ``plotExp2.m``, ``plotExp3.m``.
 * *A second order non-smooth variational model for restoring manifold-valued images* <br>
 M. Bačák, R. Bergmann, G. Steidl, A. Weinmann (2016). <br>
 SIAM Journal on Scientific Computing. 38, (1), A567–A597. [[doi]](http://dx.doi.org/10.1137/15M101988X) [[www]](http://arxiv.org/pdf/1506.02409v2.pdf)
+
+
+[![DOI](https://zenodo.org/badge/115078808.svg)](https://zenodo.org/badge/latestdoi/115078808)
