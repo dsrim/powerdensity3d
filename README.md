@@ -1,7 +1,8 @@
 ## Reconstruction of isotropic and anisotropic conductivities from power densities in three dimensions
 
 This repository contains MATLAB code illustrating the reconstruction algorithms that recovers the isotropic
-and anisotropic conductivity from power density measurements, on a cube-shaped domain.
+and anisotropic conductivity from power density measurements, on a cube-shaped domain. This code was
+developed and tested in MATLAB version R2016b.
 
 ``run/`` directory contains two runfiles 
 * ``runIso`` implements the isotropic reconstruction
@@ -14,7 +15,17 @@ Both of the runfiles
 ``plot/`` directory contains plotting tools of the output. For example, all figures in the referenced paper 
 can be reproduced by running ``plotExp1.m``, ``plotExp2.m``, ``plotExp3.m``.
 
+### Required software
+
+* MATLAB PDE Toolbox for solving the anisotropic forward problem.
+* Manifold-valued Image Restoration Toolbox (MVIRT) for plotting anisotropic coefficient.
+ A modified version of ``helpers/plotSPD.m`` is used.
+ [Github repo](https://github.com/kellertuer/MVIRT)
+
 ### References
 
-*Imaging of isotropic and anisotropic conductivities from power densities in three dimensions*
-<br> F. Monard and D. Rim <br> Preprint (2017) [arXiv](http://arxiv.org/abs/1711.03137)
+* *Imaging of isotropic and anisotropic conductivities from power densities in three dimensions*
+<br> F. Monard and D. Rim <br> Preprint (2017) [[arXiv]](http://arxiv.org/abs/1711.03137)
+* *A second order non-smooth variational model for restoring manifold-valued images* <br>
+M. Bačák, R. Bergmann, G. Steidl, A. Weinmann (2016). <br>
+SIAM Journal on Scientific Computing. 38, (1), A567–A597. [[doi]](http://dx.doi.org/10.1137/15M101988X) [[www]](http://arxiv.org/pdf/1506.02409v2.pdf)
