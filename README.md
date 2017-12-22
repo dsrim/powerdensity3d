@@ -20,7 +20,7 @@ can be reproduced by running ``plotExp1.m``, ``plotExp2.m``, ``plotExp3.m``.
 * MATLAB PDE Toolbox for solving the anisotropic forward problem.
 * Manifold-valued Image Restoration Toolbox (MVIRT) for plotting anisotropic coefficient.
  A modified version of ``helpers/plotSPD.m`` is used.
- [Github repo](https://github.com/kellertuer/MVIRT)
+ [[Github repo]](https://github.com/kellertuer/MVIRT)
 
 ### References
 
