@@ -82,7 +82,7 @@ switch type
     case 'smoothtori_exp1'    
         
         R = 0.4;    % radius of the torus
-        s = 0.1;   % width of the torus
+        s = 0.05;   % width of the torus
         f = @(coords) elem('one', coords) ...
             + const*(exp(-(torus(R,0,0,-0.2,1,0,0,coords)).^2/(2*s^2)) ...
                    + exp(-(torus(R,0,0, 0.2,0,1,0,coords)).^2/(2*s^2)) );  

@@ -47,14 +47,6 @@ for k = 1:N^3
         V213(k) V223(k) V233(k); 
         V313(k) V323(k) V333(k)]; % z-component of V
 
-  %symV(:,1,:) = .5 * (V1 + V1');
-  %symV(:,2,:) = .5 * (V2 + V2');
-  %symV(:,3,:) = .5 * (V3 + V3');
-  %
-  %VRmat = [trace(2*[symV(1,:,1); symV(1,:,2); symV(1,:,3)]*rR);
-  %         trace(2*[symV(2,:,1); symV(2,:,2); symV(2,:,3)]*rR);
-  %         trace(2*[symV(3,:,1); symV(3,:,2); symV(3,:,3)]*rR)];
-
   symV(:,1,:) =  .5*(V1 + V1');
   symV(:,2,:) =  .5*(V2 + V2');
   symV(:,3,:) =  .5*(V3 + V3');
