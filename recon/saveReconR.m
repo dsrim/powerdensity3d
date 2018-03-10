@@ -21,5 +21,5 @@ save_fname = getSaveFname('reconR',sigma_type,const,N);
 
 save(save_fname, 'reconR11','reconR12','reconR13', ...
                  'reconR21','reconR22','reconR23', ...
-                 'reconR31','reconR32','reconR33','error4R')
+                 'reconR31','reconR32','reconR33','error4R','-v7.3')
 end

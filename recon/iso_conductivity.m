@@ -47,6 +47,12 @@ switch type
                     + elem('ball', coords, s,  0.5, -0.5,  0.5) ...
                     + elem('ball', coords, s, -0.5, -0.5, -0.5) );
         
+    case 'one_gaussian'
+
+        s = 0.2;    % width of the gaussians
+        f = @(coords) 2.0*elem('one', coords) ...
+             + const*(elem('gaussian', coords, s,  0.,  0.,  0.));
+                     
     case 'gaussians'
 
         s = 0.2;    % width of the gaussians
@@ -72,6 +78,22 @@ switch type
         f = @(coords) elem('one', coords) ...
             + const*(exp(-(torus(R,0,0,-0.5,1,0,0,coords)).^2/(2*s^2)) ...
                    + exp(-(torus(R,0,0, 0.5,0,1,0,coords)).^2/(2*s^2)) );  
+
+    case 'smoothtori_exp1'    
+        
+        R = 0.4;    % radius of the torus
+        s = 0.1;   % width of the torus
+        f = @(coords) elem('one', coords) ...
+            + const*(exp(-(torus(R,0,0,-0.2,1,0,0,coords)).^2/(2*s^2)) ...
+                   + exp(-(torus(R,0,0, 0.2,0,1,0,coords)).^2/(2*s^2)) );  
+
+    case 'smoothtori_exp_alt'    
+        
+        R = 0.4;    % radius of the torus
+        s = 0.025;   % width of the torus
+        f = @(coords) elem('one', coords) ...
+            + const*(exp(-(torus(R,0,0,-0.2,1,0,0,coords)).^2/(2*s^2)) ...
+                   + exp(-(torus(R,0,0, 0.2,0,1,0,coords)).^2/(2*s^2)) );  
         
     otherwise 
         

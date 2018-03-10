@@ -33,6 +33,6 @@ end
 fprintf('\n = done.')
 
 % save output
-save(X_fname, 'Xall')
+save(X_fname, 'Xall','-v7.3')
 
 end

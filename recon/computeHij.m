@@ -26,7 +26,7 @@ end
 save_fname = getSaveFname('Hij',sigma_type,const,N);
 save(save_fname, ...
       'H11','H12','H13','H21','H22','H23','H31','H32','H33', ...
-      'S11','S12','S13','S21','S22','S23','S31','S32','S33','h');
+      'S11','S12','S13','S21','S22','S23','S31','S32','S33','h','-v7.3');
 
 
 end

@@ -47,22 +47,30 @@ for k = 1:N^3
         V213(k) V223(k) V233(k); 
         V313(k) V323(k) V333(k)]; % z-component of V
 
-  symV(:,1,:) = .5 * (V1 + V1');
-  symV(:,2,:) = .5 * (V2 + V2');
-  symV(:,3,:) = .5 * (V3 + V3');
+  %symV(:,1,:) = .5 * (V1 + V1');
+  %symV(:,2,:) = .5 * (V2 + V2');
+  %symV(:,3,:) = .5 * (V3 + V3');
+  %
+  %VRmat = [trace(2*[symV(1,:,1); symV(1,:,2); symV(1,:,3)]*rR);
+  %         trace(2*[symV(2,:,1); symV(2,:,2); symV(2,:,3)]*rR);
+  %         trace(2*[symV(3,:,1); symV(3,:,2); symV(3,:,3)]*rR)];
+
+  symV(:,1,:) =  .5*(V1 + V1');
+  symV(:,2,:) =  .5*(V2 + V2');
+  symV(:,3,:) =  .5*(V3 + V3');
   
-  VRmat = [trace(2*[symV(1,:,1); symV(1,:,2); symV(1,:,3)]*rR);
-           trace(2*[symV(2,:,1); symV(2,:,2); symV(2,:,3)]*rR);
-           trace(2*[symV(3,:,1); symV(3,:,2); symV(3,:,3)]*rR)];
+  VRmat = [trace([symV(1,:,1); symV(1,:,2); symV(1,:,3)]*rR);
+           trace([symV(2,:,1); symV(2,:,2); symV(2,:,3)]*rR);
+           trace([symV(3,:,1); symV(3,:,2); symV(3,:,3)]*rR)];
 
   VR1(k) = rR(1,:)*VRmat;
   VR2(k) = rR(2,:)*VRmat;
   VR3(k) = rR(3,:)*VRmat;
 end
 
-[dVRdx,     ~,     ~] = computeGrad(VR1 + .25*D1logdetH,h,'meshgrid');
-[    ~, dVRdy,     ~] = computeGrad(VR2 + .25*D2logdetH,h,'meshgrid');
-[    ~,     ~, dVRdz] = computeGrad(VR3 + .25*D3logdetH,h,'meshgrid');
+[dVRdx,     ~,     ~] = computeGrad(2.*VR1 + .5*D1logdetH,h,'meshgrid');
+[    ~, dVRdy,     ~] = computeGrad(2.*VR2 + .5*D2logdetH,h,'meshgrid');
+[    ~,     ~, dVRdz] = computeGrad(2.*VR3 + .5*D3logdetH,h,'meshgrid');
 
 b = 2/3*(dVRdx + dVRdy + dVRdz);    % compute RHS
 
@@ -88,7 +96,7 @@ e4sigma = sigval(:) - sigma(:);
 % Save variables
 disp(['(' mfilename ') saving outputs ']);
 save_fname = getSaveFname('reconSigma',sigma_type,const,N);
-save(save_fname,'logsigma','sigma','e4sigma');
+save(save_fname,'logsigma','sigma','e4sigma','-v7.3');
 
 end
 

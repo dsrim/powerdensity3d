@@ -1,4 +1,4 @@
-function computeIsoSols(sigma_type,const,N)
+function computeIsoSols(sigma_type,const,N,hmax)
 %COMPUTEISOSOLS
 %
 % Generate three solutions and related functions (gradients, S, detS, etc.)
@@ -11,6 +11,10 @@ function computeIsoSols(sigma_type,const,N)
 save_fname = getSaveFname('IsoSols',sigma_type,const,N);
 
 %% generate 3 solutions
+
+
+% old FDM code
+if 0
 h = 2 / (N-1);
 w0 = -1; 
 w1 =  1;
@@ -37,6 +41,86 @@ b = zeros(N,N,N);    % RHS is zero
 [u3,     ~] = solveScalarConductivity(u3,b,sigma_type,const);
 
 sigval = reshape(sigval,N,N,N);
+end
+
+% get function handle for isotropic conductivity 
+[~,cscalar_fctn] = iso_conductivity(sigma_type, const,[1,1,1]'); 
+c = @(r,s) [1;0;0;0;1;0;0;0;1]*cscalar_fctn([r.x(:),r.y(:),r.z(:)]');  
+
+%% Set up PDE Toolbox solver
+%
+% Create 3-D copies of the remaining mesh grid points, with the
+% |z|-coordinates ranging from 0 through 1. Together, these points
+% constitute a 3-D point cloud. Combine the points into an |alphaShape|
+% object.
+[xg, yg] = meshgrid(-1:.25:1);
+xg = xg(:);
+yg = yg(:);
+zg = ones(numel(xg),1);
+xg = repmat(xg,9,1);
+yg = repmat(yg,9,1);
+zg = zg*(-1:.25:1);
+zg = zg(:);
+shp = alphaShape(xg,yg,zg);
+
+% Obtain a surface mesh of the |alphaShape| object.
+[elements,nodes] = boundaryFacets(shp);
+
+% Put the data in the correct shape for |geometryFromMesh|.
+nodes = nodes';
+elements = elements';
+
+% Create a PDE model and import the surface mesh.
+model = createpde();
+geometryFromMesh(model,nodes,elements);
+
+% generate the mesh (last arg = max edge length)
+generateMesh(model,'Hmax',hmax)
+
+% set PDE coefficients
+f = 0;      % no source term
+a = 0;      % no advection term
+specifyCoefficients(model,'m',0,'d',0,'c',c,'a',a,'f',f);
+
+%% solve PDEs
+% bc x
+bc = @(r,s) r.x;
+applyBoundaryCondition(model,'dirichlet','Face',1:6,'u',bc);
+disp('solving for bc:'); display(bc); 
+tic;
+result1 = solvepde(model);
+toc;
+
+% bc y
+bc = @(r,s) r.y;
+applyBoundaryCondition(model,'dirichlet','Face',1:6,'u',bc);
+disp('solving for bc:'); display(bc); 
+tic;
+result2 = solvepde(model);
+toc;
+
+% bc z
+bc = @(r,s) r.z;
+applyBoundaryCondition(model,'dirichlet','Face',1:6,'u',bc);
+disp('solving for bc:'); display(bc); 
+tic;
+result3 = solvepde(model);
+toc;
+
+%% interpolate FE solution to uniform grid
+x = linspace(-1,1,N);
+h = 2/(N-1);
+[X,Y,Z] = meshgrid(x,x,x);
+sigval  = reshape(cscalar_fctn([X(:),Y(:),Z(:)]'),N,N,N); 
+
+u1 = result1.interpolateSolution([X(:),Y(:),Z(:)]');
+u2 = result2.interpolateSolution([X(:),Y(:),Z(:)]');
+u3 = result3.interpolateSolution([X(:),Y(:),Z(:)]');
+
+u1 = reshape(u1,N,N,N);
+u2 = reshape(u2,N,N,N);
+u3 = reshape(u3,N,N,N);
+
 
 %% compute gradients 
 disp(['(' mfilename ') computing gradients'])
@@ -72,7 +156,7 @@ disp(['(' mfilename ') plotting / saving outputs'])
 save(save_fname,'u1','u2','u3','detS','X','Y','Z','h','detDU','sigval',...
                 'du1dx','du2dx','du3dx',...
                 'du1dy','du2dy','du3dy',...
-                'du1dz','du2dz','du3dz')
+                'du1dz','du2dz','du3dz','-v7.3')
 
 end
 

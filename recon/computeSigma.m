@@ -118,11 +118,11 @@ display(['(' mfilename ') plotting / saving outputs'])
 if ~isempty(varargin)
 if strcmp(varargin{1}, 'QT')
     display(['(' mfilename ') saving to QreconSigma ...'])
-    save([output_dir 'QreconSigma_' sigmatype '_' num2str(N) '.mat'],'logsigma','sigma','error4sigma');
+    save([output_dir 'QreconSigma_' sigmatype '_' num2str(N) '.mat'],'logsigma','sigma','error4sigma','-v7.3');
 end
 else
     display(['(' mfilename ') saving to reconSigma ...'])
-    save([output_dir 'reconSigma_' sigmatype '_' num2str(N) '.mat'],'logsigma','sigma','error4sigma');
+    save([output_dir 'reconSigma_' sigmatype '_' num2str(N) '.mat'],'logsigma','sigma','error4sigma','-v7.3');
 end
 
 end
