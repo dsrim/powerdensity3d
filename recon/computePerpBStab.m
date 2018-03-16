@@ -48,8 +48,17 @@ parfor j = 1:M
         wflag(j) = 1;
     end
     
-    Bx = reshape(U(:,9),3,3);
-    
+	Bx = U(:,9);
+	Bx = U(:,9)/det(reshape(Bx,3,3));
+	for l = 1:10
+	for k = 1:size(A,2)
+		w = A(:,k)/norm(A(:,k));
+	    Bx = Bx - w*w'*Bx;
+	    Bx = Bx/abs(det(reshape(Bx,3,3)))^(1/3);
+	end
+	end
+    Bx = reshape(Bx,3,3);
+
     detBx = computeCubicsqrt(sqrt(det(Hx))/det(Bx));
     %
     %if abs(detBx) > 1e1

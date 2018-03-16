@@ -4,6 +4,7 @@ function reconStab3p2(gamma_type,N,const,hmax)
 % implementation of stabilized 3+2 algorithm
 
 save_fname = getSaveFname('reconStab3p2',gamma_type,const,N); 
+save_perp_fname = getSaveFname('reconStab3p2_perp',gamma_type,const,N); 
 sol_fname = getSaveFname('AnisoSolsStab3p2',gamma_type,const,N);
 if exist(sol_fname,'file')
     disp(['saved file found: ' sol_fname])
@@ -19,6 +20,12 @@ h = 2/(N-1);
 [X,Y,Z]   = ndgrid(x,x,x);
 gamma_fun = aniso_conductivity(gamma_type,const);
 Gamma     = reshape(gamma_fun(X(:)',Y(:)',Z(:)'),3,3,N^3);
+
+H_fname = getSaveFname('AnisoSolsStab3p2_H',gamma_type,const,N);
+if exist(H_fname,'file')
+    disp(['saved file found: ' sol_fname])
+	load(H_fname)
+else
 
 % compute power densities H1, H2, H3, H4
 H1 = computeAnisoHtoolbox(Gamma,h,N,...
@@ -36,6 +43,9 @@ detDU1 = computeDetDUToobox(X,Y,Z,  result1,  result2,  result3);
 detDU2 = computeDetDUToobox(X,Y,Z, result21,  result2,  result3);
 detDU3 = computeDetDUToobox(X,Y,Z,  result1, result22,  result3);
 detDU4 = computeDetDUToobox(X,Y,Z,  result1,  result2, result23);
+save(H_fname,'H1','H2','H3','H4',...
+			 'detDU1','detDU2','detDU3','detDU4');
+end
 
                       
 %% Stabilized reconstruction algorithm
@@ -51,6 +61,9 @@ tMu4 = computeAnisoMuStab(H4);
 [tZ2,tZHOm2] = computeNormalMatStab(tMu2,H2,N);
 [tZ3,tZHOm3] = computeNormalMatStab(tMu3,H3,N);    
 [tZ4,tZHOm4] = computeNormalMatStab(tMu4,H4,N);
+
+save(save_perp_fname,'tZ1','tZ2','tZ3','tZ4',...
+                     'tZHOm1','tZHOm2','tZHOm3','tZHOm4')
 
 % compute tB 
 [tB1,~,~,condA1] = computePerpBStab(tZ1, tZHOm1, H1);
