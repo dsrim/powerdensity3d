@@ -135,6 +135,6 @@ toc;
 save_fname = getSaveFname('AnisoSolsStab3p2',gamma_type,const,N);
 save(save_fname, ...
       'result1', 'result2', 'result3', 'result4', 'result5','result6',...
-     'result21','result22','result23');
+     'result21','result22','result23','-v7.3');
 
 end

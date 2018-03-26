@@ -1,4 +1,4 @@
-function reconIso(sigma_type, const, N)
+function reconIso(sigma_type, const, N, hmax)
 %RECONISO
 %
 % run reconstruction for scalar conductivity
@@ -10,10 +10,11 @@ h = 2/(N-1);                    % grid width
 %% generate three solutions to the conductivity problem
 
 sol_fname = getSaveFname('IsoSols',sigma_type,const,N);
+
 if exist(sol_fname,'file')
     disp(['saved file found: ' sol_fname])
 else
-    computeIsoSols(sigma_type,const,N);
+    computeIsoSols(sigma_type,const,N,hmax);
 end
 
 %% compute power density Hij 

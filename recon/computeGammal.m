@@ -59,9 +59,9 @@ output_dir = '../output/';
 display(['(' mfilename ') plotting / saving outputs'])
 
 save([output_dir 'Gammal_' sigma_name '_' num2str(resolution) '.mat'], ...
-              'Gammam1','Gammam2','Gammam3','skError','skErrorSym','skErrorDiag');
+              'Gammam1','Gammam2','Gammam3','skError','skErrorSym','skErrorDiag','-v7.3');
 % modify Lambda here!
 save([output_dir 'LambdalFl_' sigma_name '_' num2str(resolution) '.mat'], ...
-              'Lambda11','Lambda21','Lambda31','-append');
+              'Lambda11','Lambda21','Lambda31','-append','-v7.3');
 
 end

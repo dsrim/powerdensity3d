@@ -26,6 +26,10 @@ can be reproduced by running ``plotExp1.m``, ``plotExp2.m``, ``plotExp3.m``.
 
 * *Imaging of isotropic and anisotropic conductivities from power densities in three dimensions*
 <br> F. Monard and D. Rim <br> Preprint (2017) [[arXiv]](http://arxiv.org/abs/1711.03137)
+* *MVIRT, A toolbox for manifold-valued image registration.*
+<br>Bergmann, R (2017).  <br>
+IEEE International Conference on Image Processing, IEEE ICIP 2017, Beijing, China, September 17–20, 2017
+ [[Github repo]](https://github.com/kellertuer/MVIRT)
 * *A second order non-smooth variational model for restoring manifold-valued images* <br>
 M. Bačák, R. Bergmann, G. Steidl, A. Weinmann (2016). <br>
 SIAM Journal on Scientific Computing. 38, (1), A567–A597. [[doi]](http://dx.doi.org/10.1137/15M101988X) [[www]](http://arxiv.org/pdf/1506.02409v2.pdf)

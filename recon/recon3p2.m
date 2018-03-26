@@ -75,7 +75,7 @@ save_fname = getSaveFname('recon3p2',gamma_type,const,N);
 % save outputs
 if save_output
     save(save_fname, 'B', 'tau', 'Gamma', 'H','detDU','tgamma','tau',...
-                     'e4tgamma','e4gamma','e4tau');
+                     'e4tgamma','e4gamma','e4tau','-v7.3');
 end
 
 end
