@@ -1,7 +1,4 @@
 
-addpath(genpath('../'))
-run('../../MVIRT/initMVIRT.m')
-
 
 a = 280;
 img_width = a / 300*325;
@@ -11,7 +8,7 @@ img_height = a;
 cmap=flipud(colormap(parula));
 
 N = 128;
-g2 = myC('anisotori',2);
+g2 = aniso_conductivity('anisotori',2);
 xx = linspace(-1,1,N);
 [X,Y,Z] = ndgrid(xx,xx,xx);
 Gamma2 = g2(X(:)',Y(:)',Z(:)');
@@ -35,7 +32,7 @@ print(gcf,'tau_slices1.png','-dpng','-r150');
 
 %%
 N = 40;
-g2 = myC('anisotori',2);
+g2 = aniso_conductivity('anisotori',2);
 xx = linspace(-1,1,N);
 [X,Y,Z] = ndgrid(xx,xx,xx);
 Gamma2 = g2(X(:)',Y(:)',Z(:)');

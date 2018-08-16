@@ -48,9 +48,9 @@ vars = ip.Results;
 dataDim = size(vars.f);
 manDim = dataDim(1:2);
 assert( all(manDim==[3,3]), 'visualization only works for 3x3 matrices');
-% if (numel(vars.Colors)>0)
-%     assert( all(size(vars.Colors)==[dataDim(3:end),3]),'The color data has to be the same as the data dimensions with an additional last dimension with RGB channels');
-% end
+if (numel(vars.Colors)>0)
+    assert( all(size(vars.Colors)==[dataDim(3:end),3]),'The color data has to be the same as the data dimensions with an additional last dimension with RGB channels');
+end
 d = manDim(1);
 dataDim = dataDim(3:end);
 dataDim = [dataDim,ones(1,3-length(dataDim))];
