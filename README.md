@@ -24,8 +24,8 @@ can be reproduced by running ``plotExp1.m``, ``plotExp2.m``, ``plotExp3.m``.
 
 ### References
 
-* *Imaging of isotropic and anisotropic conductivities from power densities in three dimensions*
-<br> F. Monard and D. Rim <br> Preprint (2017) [[arXiv]](http://arxiv.org/abs/1711.03137)
+* [[*Imaging of isotropic and anisotropic conductivities from power densities in three dimensions*]](http://iopscience.iop.org/article/10.1088/1361-6420/aabe5a/meta)
+<br> F. Monard and D. Rim <br> *Inverse Probl.* (2018) **34** (7), 075005 [[arXiv]](http://arxiv.org/abs/1711.03137)
 * *MVIRT, A toolbox for manifold-valued image registration.*
 <br>Bergmann, R (2017).  <br>
 IEEE International Conference on Image Processing, IEEE ICIP 2017, Beijing, China, September 17–20, 2017
